@@ -18,9 +18,8 @@ function MainContainer() {
       .then(questionary => setData(questionary));
   }, [setData]);
 
-  const onSave = () => {
-    console.log(data);
-    apiService.post("/api/questionary", data).then(() => console.log("save"));
+  const onSave = async () => {
+    await apiService.post("/api/questionary", data);
   };
 
   const insert = ({ variantId, position }: PayloadText) => {
