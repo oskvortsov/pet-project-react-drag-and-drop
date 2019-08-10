@@ -3,22 +3,12 @@
   "private": true,
   "workspaces": [
     "front",
-    "back"
+    "server"
   ],
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
 
-  },
-  "devDependencies": {
-    "ts-node": "7.0.1",
-    "typescript": "3.2.2"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "yarn soda lint-staged",
-      "commit-msg": "yarn soda commitlint"
-    }
   },
   "publishConfig": {
     "access": "public"
