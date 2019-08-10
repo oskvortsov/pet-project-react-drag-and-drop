@@ -1,0 +1,8 @@
+@font-face {
+  font-family: 'SF Pro';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../public/assets/fonts/SF-Pro.ttf'); /* IE9 Compat Modes */
+  src: local('Continetal Icon'), local('ContinetalIcon'),
+  url('../public/assets/fonts/SF-Pro.ttf') format('truetype') /* Safari, Android, iOS */
+}
