@@ -21,6 +21,10 @@ class ApiService {
       .then(this.response);
   }
 
+  public post(url: string, body): Promise<any> {
+    return axios.post(url, body).then(this.response);
+  }
+
   private response({ data }: AxiosResponse) {
     return data;
   }

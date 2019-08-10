@@ -1,23 +1,24 @@
 import express from "express";
 
-import { getQuestionary } from "./services/questionary";
+import { handlerError, handlerResponse } from "./helpers/response";
+import { getQuestionary, setQuestionary } from "./services/questionary";
 
 const app = express();
 const port = 3200;
 
+app.use(express.json());
+app.use(express.urlencoded());
+
 app.get("/api/questionary", async (req, res) => {
   getQuestionary()
-    .then(data => res.send(data))
-    .catch(error =>
-      res.status(400).send({
-        error
-      })
-    );
+    .then(handlerResponse(res))
+    .catch(handlerError(res));
 });
 
-app.listen(port, err => {
-  if (err) {
-    return console.error(err);
-  }
-  return console.log(`server is listening on ${port}`);
+app.post("/api/questionary", async (req, res) => {
+  setQuestionary(req.body)
+    .then(handlerResponse(res))
+    .catch(handlerError(res));
 });
+
+app.listen(port);

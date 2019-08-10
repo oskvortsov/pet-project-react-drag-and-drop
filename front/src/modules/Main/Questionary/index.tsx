@@ -22,9 +22,10 @@ export interface OnChangeText {
 interface QuestionaryProps {
   data: QuestData;
   onChangeText: (data: OnChangeText) => void;
+  onSave: (data: QuestData) => void;
 }
 
-function Questionary({ data, onChangeText }: QuestionaryProps) {
+function Questionary({ data, onChangeText, onSave }: QuestionaryProps) {
   if (!data) {
     return null;
   }
@@ -45,7 +46,7 @@ function Questionary({ data, onChangeText }: QuestionaryProps) {
       <Variants list={variants} />
       <ButtonsGroups>
         <Button width="32px" dots />
-        <Button>Next</Button>
+        <Button onClick={onSave}>Save</Button>
       </ButtonsGroups>
     </QuestionaryWrapper>
   );

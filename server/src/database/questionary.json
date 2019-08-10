@@ -1,12 +1,12 @@
 {
   "text": "Keeping a pet can be {$$$insetDropZone$$$} but it can also be {$$$insetDropZone$$$} if you do it well",
   "variants": [
-    "weird",
-    "enthusiastic",
-    "rewarding",
-    "time-consuming",
-    "rare",
-    "lucrative",
-    "fierce"
+    { "id": 1, "title": "weird"},
+    { "id": 2,  "title": "enthusiastic"},
+    { "id": 3,  "title": "rewarding"},
+    { "id": 4,  "title": "time-consuming"},
+    { "id": 5,  "title": "rare"},
+    { "id": 6,  "title": "lucrative"},
+    { "id": 7,  "title": "fierce"}
   ]
 }
