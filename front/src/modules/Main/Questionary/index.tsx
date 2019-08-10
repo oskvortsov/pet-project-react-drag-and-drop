@@ -1,25 +1,31 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 import { Badge, Text, Button } from "../../../core/primitives";
 
 import { ButtonsGroups, QuestionaryWrapper, TitleWrapper } from "./styled";
 
-import { TextItem } from "../../../core/types/text";
+import { QuestData } from "../../../core/types/text";
 
-import TextZone from "./TextZone";
-import SelectZone from "./SelectZone";
+import TextQuest from "./Text";
+import Variants from "./Variants";
 
-interface QuestionaryProps {
-  text: TextItem[];
+export type OnDrop = (data: OnChangeText) => void;
+
+export interface OnChangeText {
+  action: "insert" | "remove";
+  payload: {
+    position: number;
+    variantId: number;
+  };
 }
 
-function Questionary({ text }: QuestionaryProps) {
-  const [selectList, setSelectList] = useState([]);
+interface QuestionaryProps {
+  data: QuestData;
+  onChangeText: (data: OnChangeText) => void;
+}
 
-  useEffect(() => {
-    setSelectList(text && text.filter(item => item.type === "drop"));
-  }, [text, setSelectList]);
-
+function Questionary({ data, onChangeText }: QuestionaryProps) {
+  const { text, variants } = data;
   return (
     <QuestionaryWrapper>
       <TitleWrapper>
@@ -30,8 +36,8 @@ function Questionary({ text }: QuestionaryProps) {
           Replace the phrases in the gaps with these adjectives.
         </Text>
       </TitleWrapper>
-      <TextZone text={text} />
-      <SelectZone text={selectList} />
+      <TextQuest text={text} onDrop={onChangeText} />
+      <Variants list={variants} />
       <ButtonsGroups>
         <Button width="32px" dots />
         <Button>Next</Button>

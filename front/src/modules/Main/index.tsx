@@ -1,11 +1,12 @@
-import React from "react";
-import { TextItem } from "../../core/types/text";
+import React, { useState } from "react";
 
-import Questionary from "./Questionary";
+import { TextItem, Variant } from "../../core/types/text";
+
+import Questionary, { OnChangeText } from "./Questionary";
 
 // interface QuestionaryContainerProps {}
 
-export const MockDate: TextItem[] = [
+export const text: TextItem[] = [
   { position: 1, type: "text", value: "Keeping" },
   { position: 2, type: "text", value: " " },
   { position: 3, type: "text", value: "a" },
@@ -31,8 +32,81 @@ export const MockDate: TextItem[] = [
   { position: 23, type: "drop", value: "" }
 ];
 
+const variants: Variant[] = [
+  { id: 1, title: "weird" },
+  { id: 2, title: "enthusiastic" },
+  { id: 3, title: "time-consuming" },
+  { id: 4, title: "rare" }
+];
+
+const mockData = {
+  text,
+  variants
+};
+
+interface PayloadText {
+  position: number;
+  variantId: number;
+}
+
 function MainContainer() {
-  return <Questionary text={MockDate} />;
+  const [data, setData] = useState(mockData);
+
+  const insert = ({ variantId, position }: PayloadText) => {
+    const variant = data.variants.find(item => item.id === variantId);
+
+    if (variant) {
+      const text = data.text.map(item => {
+        if (item.position === position) {
+          item.variant = variant;
+        }
+
+        return item;
+      });
+      const variants = data.variants.filter(item => item.id !== variantId);
+
+      const newData = {
+        text,
+        variants
+      };
+
+      setData(newData);
+    }
+  };
+
+  const remove = ({ position }: PayloadText) => {
+    const textItem = data.text.find(item => item.position === position);
+
+    if (textItem && textItem.variant) {
+      const variants = [...data.variants, textItem.variant];
+      const text = data.text.map(item => {
+        if (item.position === position) {
+          item.value = textItem.value;
+          item.variant = null;
+        }
+
+        return item;
+      });
+
+      const newData = {
+        text,
+        variants
+      };
+
+      setData(newData);
+    }
+  };
+
+  const onChangeTest = ({ action, payload }: OnChangeText) => {
+    switch (action) {
+      case "insert":
+        return insert(payload);
+      case "remove":
+        return remove(payload);
+    }
+  };
+
+  return <Questionary data={data} onChangeText={onChangeTest} />;
 }
 
 export default React.memo(MainContainer);
