@@ -13,11 +13,9 @@ interface SelectZoneProps {
 function Variants({ list }: SelectZoneProps) {
   return (
     <VariantsWrapper>
-      {(list &&
-        list.map(({ id, title }) => (
-          <VariantsItem key={id} id={id} title={title} />
-        ))) ||
-        null}
+      {list.map(({ id, title }) => (
+        <VariantsItem key={id} id={id} title={title} />
+      ))}
     </VariantsWrapper>
   );
 }

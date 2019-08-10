@@ -14,23 +14,24 @@ interface TextZoneProps {
 }
 
 function TextZone({ text, onDrop }: TextZoneProps) {
-  const renderText =
-    (text &&
-      text.map(({ position, value, variant, type }) =>
-        type === "text" ? (
-          <TextItemWrapper key={position} id={position}>
-            {value}
-          </TextItemWrapper>
-        ) : (
-          <DropZone
-            key={position}
-            value={variant}
-            onDrop={onDrop}
-            position={position}
-          />
-        )
-      )) ||
-    null;
+  const renderText = text.map(({ position, value, variant, type }) => {
+    if (type === "text") {
+      return (
+        <TextItemWrapper key={position} id={position}>
+          {value}
+        </TextItemWrapper>
+      );
+    }
+
+    return (
+      <DropZone
+        key={position}
+        value={variant}
+        onDrop={onDrop}
+        position={position}
+      />
+    );
+  });
 
   return <TextZoneWrapper>{renderText}</TextZoneWrapper>;
 }
