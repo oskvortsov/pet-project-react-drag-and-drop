@@ -5,7 +5,7 @@ import { getQuestionary } from "./services/questionary";
 const app = express();
 const port = 3200;
 
-app.get("/questionary", async (req, res) => {
+app.get("/api/questionary", async (req, res) => {
   getQuestionary()
     .then(data => res.send(data))
     .catch(error =>

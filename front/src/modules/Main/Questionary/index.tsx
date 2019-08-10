@@ -25,7 +25,12 @@ interface QuestionaryProps {
 }
 
 function Questionary({ data, onChangeText }: QuestionaryProps) {
+  if (!data) {
+    return null;
+  }
+
   const { text, variants } = data;
+
   return (
     <QuestionaryWrapper>
       <TitleWrapper>
