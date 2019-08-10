@@ -1,6 +1,5 @@
 import styled from "styled-components/macro";
 import {
-  color,
   ColorProps,
   fontSize,
   FontSizeProps,
@@ -9,6 +8,7 @@ import {
   opacity,
   OpacityProps
 } from "styled-system";
+import { getColor, getColorAlpha } from "../../helpers/styles";
 
 import { ColorsType } from "../../theme";
 
@@ -27,6 +27,10 @@ export const TextWrapper = styled.div`
 
   ${fontSize};
   ${lineHeight};
-  ${color};
   ${opacity};
+  ${props => props.color && `color: ${getColor(props.color, props)};`};
+  ${props =>
+    props.color &&
+    props.opacity &&
+    `color: ${getColorAlpha(props.color, props.opacity, props)};`};
 `;

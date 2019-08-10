@@ -1,4 +1,5 @@
 import React from "react";
+import Text from "../../../../core/primitives/Text";
 import { TextItem } from "../../../../core/types/text";
 
 import { DropZone, TextItemWrapper, TextZoneWrapper } from "./styled";
@@ -16,7 +17,16 @@ function TextZone({ text }: TextZoneProps) {
             type === "text" ? (
               <TextItemWrapper key={position}>{value}</TextItemWrapper>
             ) : (
-              <DropZone />
+              <DropZone key={position} onDragOver={event => console.log(event)}>
+                <Text
+                  lineHeight="12px"
+                  fontSize="11px"
+                  color="#001926"
+                  opacity={0.5}
+                >
+                  something that takes up a lot of time
+                </Text>
+              </DropZone>
             )
           )}
       </p>

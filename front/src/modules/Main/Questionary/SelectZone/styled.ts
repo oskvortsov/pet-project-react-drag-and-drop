@@ -9,7 +9,6 @@ export const SelectZoneWrapper = styled.div`
 `;
 
 export const SelectZoneItemWrapper = styled.div`
-  width: 128px;
   height: 32px;
   display: flex;
   align-items: center;

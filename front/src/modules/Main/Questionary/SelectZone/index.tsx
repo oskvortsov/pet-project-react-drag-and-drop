@@ -13,7 +13,13 @@ function SelectZone({ text }: SelectZoneProps) {
     <SelectZoneWrapper>
       {text &&
         text.map(({ position }) => (
-          <SelectZoneItemWrapper key={position}>asdasd</SelectZoneItemWrapper>
+          <SelectZoneItemWrapper
+            draggable
+            onDrag={() => console.log(position)}
+            key={position}
+          >
+            asdasd
+          </SelectZoneItemWrapper>
         ))}
     </SelectZoneWrapper>
   );
